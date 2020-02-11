@@ -1,15 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Spa Menu</title>
-    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 <body>
 <h1>My Super Fancy Spa</h1>
-<div id = "clientProfile">
+<div id="clientProfile">
+    <h2>My profile</h2>
+    <p th:text="${name}">Name</p>
+    <p th:text="${skintype}">Skintype</p>
+    <p th:text="${manipedi}">ManiPedi?</p>
 </div>
-<div id = "servicesMenu">
+<div id="servicesMenu">
+    <table>
+        <thead>
+        <tr>
+            <th>
+                <h3>Facial Options</h3>
+            </th>
+        </tr>
+        </thead>
+        <tr th:each="facial : ${appropriateFacials}">
+            <td th:text="${facial}">Facial Type</td>
+        </tr>
+    </table>
+    <div th:if='${manipedi.equals("manicure")}'>
+        <div th:replace="fragments :: manicureDescription"></div>
+    </div>
+    <div th:if='${manipedi.equals("pedicure")}'>
+        <div th:replace="fragments :: pedicureDescription"></div>
+    </div>
 </div>
+
 </body>
 </html>
